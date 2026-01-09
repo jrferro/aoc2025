@@ -4,8 +4,8 @@ def max_joltage(bank, batt_ct):
     if batt_ct < 1:
         return 0
     max = 0
-    for t in range(len(bank)-batt_ct, -1, -1):
-        if int(bank[t]) >= max:
+    for t in range(len(bank) - batt_ct + 1):
+        if int(bank[t]) > max:
             max = int(bank[t])
             pos = t
     extra_joltage = max_joltage(bank[pos+1:], batt_ct-1)
