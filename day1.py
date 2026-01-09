@@ -19,7 +19,7 @@ def end_positions(amts, cur, modulus):
 
 def end_pos_ct(filename):
     insns = open(filename, "r").read().splitlines()
-    amts = map(turn_amt, insns)
+    amts = [turn_amt(insn) for insn in insns]
     positions = end_positions(amts, START_POS, DIAL_SIZE)
     return positions.count(0)
 
@@ -39,7 +39,7 @@ def count_zeros(amts, cur, modulus):
 
 def during_pos_ct(filename):
     insns = open(filename, "r").read().splitlines()
-    amts = map(turn_amt, insns)
+    amts = [turn_amt(insn) for insn in insns]
     zeros = count_zeros(amts, START_POS, DIAL_SIZE)
     return sum(zeros)
 

@@ -12,7 +12,7 @@ def is_pair(id):
     return False
 
 def find_pairs(id_range):
-    id_start,id_end = map(int, id_range.split('-'))
+    id_start,id_end = [int(id) for id in id_range.split('-')]
     id_pairs = [id for id in range(id_start, id_end+1) if is_pair(id)]
     return id_pairs
 
@@ -27,7 +27,7 @@ def is_tuple(id):
     return False
 
 def find_tuples(id_range):
-    id_start,id_end = map(int, id_range.split('-'))
+    id_start,id_end = [int(id) for id in id_range.split('-')]
     id_tuples = [id for id in range(id_start, id_end+1) if is_tuple(id)]
     return id_tuples
 
