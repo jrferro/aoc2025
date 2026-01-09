@@ -38,10 +38,10 @@ def pattern_sum(filename, patterner):
     return sum(matches)
 
 def main():
-    print("pattern pairs test: ", pattern_sum(f"day2_test.txt", find_pairs))
-    print("pattern pairs input: ", pattern_sum(f"day2_input.txt", find_pairs))
-    print("pattern tuples test: ", pattern_sum(f"day2_test.txt", find_tuples))
-    print("pattern tuples input: ", pattern_sum(f"day2_input.txt", find_tuples))
+    print("pattern pairs test: ", pattern_sum("day2_test.txt", find_pairs))
+    print("pattern pairs input: ", pattern_sum("day2_input.txt", find_pairs))
+    print("pattern tuples test: ", pattern_sum("day2_test.txt", find_tuples))
+    print("pattern tuples input: ", pattern_sum("day2_input.txt", find_tuples))
 
 if __name__ == "__main__":
     main()

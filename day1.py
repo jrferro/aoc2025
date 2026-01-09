@@ -44,10 +44,10 @@ def during_pos_ct(filename):
     return sum(zeros)
 
 def main():
-    print("end count test: ", end_pos_ct(f"day1_test.txt"))
-    print("end count input: ", end_pos_ct(f"day1_input.txt"))
-    print("during count test: ", during_pos_ct(f"day1_test.txt"))
-    print("during count input: ", during_pos_ct(f"day1_input.txt"))
+    print("end count test: ", end_pos_ct("day1_test.txt"))
+    print("end count input: ", end_pos_ct("day1_input.txt"))
+    print("during count test: ", during_pos_ct("day1_test.txt"))
+    print("during count input: ", during_pos_ct("day1_input.txt"))
 
 if __name__ == "__main__":
     main()
