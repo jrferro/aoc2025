@@ -1,3 +1,5 @@
+# https://adventofcode.com/2025/day/1
+
 DIAL_SIZE = 100
 START_POS = 50
 
