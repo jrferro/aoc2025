@@ -1,12 +1,20 @@
 # https://adventofcode.com/2025/day/8
 
+# I'm desperately abusing the fact that this is a one-off puzzle, and
+# not making a class for the locations.  Instead, a loc is a list of
+# [ID, X, Y, Z, CIRC], and we depend on lists being mutable to update
+# CIRC whenever circuits are merged.  The circuits dict is also
+# updated to keep track of all locs that are in each circuit.
+
 def init_dists(locs):
     dists = []
     for loc in locs:
         for nbr in locs:
             if loc == nbr or loc[0] > nbr[0]:
                 continue
-            dist = (loc[1]-nbr[1])**2 + (loc[2]-nbr[2])**2 + (loc[3]-nbr[3])**2
+            dist = ((loc[1]-nbr[1])**2 +
+                    (loc[2]-nbr[2])**2 +
+                    (loc[3]-nbr[3])**2)
             dists.append([dist, loc, nbr])
     dists.sort(key = lambda d: d[0])
     return dists
