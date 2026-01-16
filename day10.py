@@ -1,6 +1,7 @@
 # https://adventofcode.com/2025/day/10
 
 import attrs
+import sympy
 
 @attrs.define
 class mach:
@@ -70,50 +71,19 @@ class mach:
             new_states = []
         return -1
 
-    # This search-based method of accumulating joltage is
-    # far too slow.  This needs to be redone using either
-    # numpy or sympy.
-
     def button_has(self, i):
         return [1 if i in b else 0 for b in self.buttons]
 
     def button_array(self):
         return [self.button_has(i) for i in range(len(self.goal))]
 
-    def apply_joltage_press(self, state, button):
-        new_state = [i for i in state]
-        for b in button:
-            new_state[b] += 1
-        return tuple(new_state)
-    
-    def joltage_overshot(self, state):
-        for i,v in enumerate(state):
-            if v > self.joltage[i]:
-                return True
-        return False
-
     def min_joltage_presses(self):
-        orig_state = tuple(0 for i in self.joltage)
-        cur_states = [orig_state]
-        all_states = set([orig_state])
-        new_states = []
-        num_presses = 0
-        while num_presses < sum(self.joltage):
-            num_presses += 1
-            for s in cur_states:
-                for b in self.buttons:
-                    t = self.apply_joltage_press(s, b)
-                    if t == self.joltage:
-                        print(f"Returning {num_presses} after {len(all_states)} states.")
-                        return num_presses
-                    if self.joltage_overshot(t):
-                        continue
-                    if t not in all_states:
-                        all_states.add(t)
-                        new_states.append(t)
-            cur_states = new_states
-            new_states = []
-        return -1
+        a = sympy.Matrix(self.button_array())
+        b = sympy.Matrix(self.joltage)
+        x, params = a.gauss_jordan_solve(b)
+        taus_zeroes = { tau:0 for tau in params }
+        xu = x.xreplace(taus_zeroes)
+        return sum(xu)
 
 def min_presses(filename):
     mach_strs = open(filename, "r").read().splitlines()
@@ -134,8 +104,8 @@ def min_joltage_presses(filename):
 def main():
     print("min presses test: ", min_presses("day10_test.txt"))
     print("min presses input: ", min_presses("day10_input.txt"))
-    # print("min joltage presses test: ", min_joltage_presses("day10_test.txt"))
-    # print("min joltage presses input: ", min_joltage_presses("day10_input.txt"))
+    print("min joltage presses test: ", min_joltage_presses("day10_test.txt"))
+    print("min joltage presses input: ", min_joltage_presses("day10_input.txt"))
 
 if __name__ == "__main__":
     main()
