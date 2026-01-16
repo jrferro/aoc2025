@@ -73,7 +73,13 @@ class mach:
     # This search-based method of accumulating joltage is
     # far too slow.  This needs to be redone using either
     # numpy or sympy.
-    
+
+    def button_has(self, i):
+        return [1 if i in b else 0 for b in self.buttons]
+
+    def button_array(self):
+        return [self.button_has(i) for i in range(len(self.goal))]
+
     def apply_joltage_press(self, state, button):
         new_state = [i for i in state]
         for b in button:
